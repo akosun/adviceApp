@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Advice generator app</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-size: 16px;
+        font-family: "Manrope", sans-serif;
+      }
+      body {
+        display: flex;
+        height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: hsl(217, 19%, 24%);
+      }
+
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        border-radius: 10px;
+        text-align: center;
+        /* max-width: 430px;
+        margin: 0 0px; */
+        background: hsl(217, 19%, 38%);
+        box-shadow: 5px 5px 30px #00000048;
+      }
+      .content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .attribution {
+        margin-top: 70px;
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 100%, 94%);
+      }
+      .button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 70px;
+        width: 70px;
+        background: hsl(150, 100%, 66%);
+        border-radius: 50%;
+        transform: translateY(50%);
+        transition: all 0.3s;
+      }
+      .button:hover {
+        box-shadow: 0 0 30px 5px hsl(150, 100%, 66%);
+      }
+      button {
+        height: 70px;
+        width: 70px;
+        background: hsl(150, 100%, 66%);
+        border: none;
+        outline: none;
+        background: none;
+        cursor: pointer;
+        z-index: 10;
+      }
+      .divider-rule img {
+        color: white;
+      }
+      .text-area {
+        max-width: 400px;
+      }
+      h1 {
+        text-transform: uppercase;
+        color: hsl(150, 100%, 66%);
+        margin: 40px 0 15px;
+        font-size: 12px;
+      }
+      p {
+        color: hsl(193, 38%, 86%);
+        font-size: 28px;
+        margin-bottom: 25px;
+      }
+      .divider-rule {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .img {
+        stroke: #fff;
+        width: 100%;
+        transform: scale(0.85);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="content">
+        <div class="text-area">
+          <h1>Advice # <span class="advise-num">117</span></h1>
+          <p class="text">
+            "it is easy to sit up and take notice, what's difficult is getting
+            up and taking action"
+          </p>
+        </div>
+        <div class="divider-rule">
+          <svg
+            class="img"
+            width="444"
+            height="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g fill="none" fill-rule="evenodd">
+              <path fill="#4F5D74" d="M0 8h196v1H0zM248 8h196v1H248z" />
+              <g transform="translate(212)" fill="#CEE3E9">
+                <rect width="6" height="16" rx="3" />
+                <rect x="14" width="6" height="16" rx="3" />
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="button">
+          <button class="btn">
+            <img src="/images/icon-dice.svg" alt="" />
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Akosun Joshua</a>.
+    </div>
+    <script>
+      const adviseNum = document.querySelector(".advise-num");
+      let txt = document.querySelector(".text");
+      let api = "https://api.adviceslip.com/advice";
+      const btn = document.querySelector(".btn");
+      btn.addEventListener("click", () => {
+        fetchData();
+      });
+      txt.addEventListener("click", () => {
+        console.log("kjk");
+      });
+      function fetchData() {
+        fetch(api).then(function (res) {
+          res.json().then(function (result) {
+            myResult(result);
+          });
+        });
+      }
+      function myResult(info) {
+        // console.log(info);
+        const { advice, id } = info.slip;
+        adviseNum.textContent = id;
+        // console.log(advice);
+        txt.innerText = `" ${advice} "`;
+      }
+    </script>
+  </body>
+</html>
